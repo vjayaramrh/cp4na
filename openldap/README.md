@@ -1,6 +1,6 @@
-As a first step and prior to deploying openldap using the ldap-app.yaml, create a docker secret named "docker" in the default project space which is needed later for deploying OpenLDAP service by executing the below command.
+A docker secret needs to be created to pull images prior to deploying the openldap service from the ldap-app.yaml. Refer the command below to create the docker secret
 
-Note 1: The secret name "docker" is referred inside of the "ldap-app.yaml" file
+Note 1: The secret name "docker" is referenced inside of the "ldap-app.yaml" file
 
 Note 2: Replace values inside <> with your actual docker account related values
 
