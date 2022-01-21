@@ -1,4 +1,4 @@
-A docker secret needs to be created to pull images prior to deploying the openldap service from the ldap-app.yaml. Refer the command below to create the docker secret
+A docker secret needs to be created to pull images (`osixia/openldap:stable` & `osixia/phpldapadmin:stable`) prior to deploying the openldap service from the ldap-app.yaml. Refer the command below to create the docker secret
 
 Note 1: The secret name "docker" is referenced inside of the "ldap-app.yaml" file
 
