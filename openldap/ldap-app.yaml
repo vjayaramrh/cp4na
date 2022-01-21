@@ -5,13 +5,13 @@ data:
     dn: ou=groups,dc=alm,dc=com
     objectClass: organizationalUnit
     objectClass: top
-    ou: groups
+    ou: groups    
 
     dn: ou=people,dc=alm,dc=com
     changetype: add
     objectClass: organizationalUnit
     objectClass: top
-    ou: people
+    ou: people    
 
     dn: uid=almuser,ou=people,dc=alm,dc=com
     changetype: add
@@ -20,8 +20,7 @@ data:
     cn: almuser
     sn: almuser
     uid: almuser
-    userPassword: $2a$10$nyG5R781Vbowtj73XohFNOY6RHoMz6fInUMwtHO0lkib.mh0yo4T6
-
+    userPassword: $2a$10$nyG5R781Vbowtj73XohFNOY6RHoMz6fInUMwtHO0lkib.mh0yo4T6    
     dn: uid=almoperator,ou=people,dc=alm,dc=com
     changetype: add
     objectClass: person
@@ -29,8 +28,7 @@ data:
     cn: almoperator
     sn: almoperator
     uid: almoperator
-    userPassword: $2a$10$nyG5R781Vbowtj73XohFNOY6RHoMz6fInUMwtHO0lkib.mh0yo4T6
-
+    userPassword: $2a$10$nyG5R781Vbowtj73XohFNOY6RHoMz6fInUMwtHO0lkib.mh0yo4T6    
     dn: uid=almoeditor,ou=people,dc=alm,dc=com
     changetype: add
     objectClass: person
@@ -38,8 +36,7 @@ data:
     cn: almoeditor
     sn: almoeditor
     uid: almoeditor
-    userPassword: $2a$10$nyG5R781Vbowtj73XohFNOY6RHoMz6fInUMwtHO0lkib.mh0yo4T6
-
+    userPassword: $2a$10$nyG5R781Vbowtj73XohFNOY6RHoMz6fInUMwtHO0lkib.mh0yo4T6    
     dn: uid=almadmin,ou=people,dc=alm,dc=com
     changetype: add
     objectClass: person
@@ -47,8 +44,7 @@ data:
     cn: almadmin
     sn: almadmin
     uid: almadmin
-    userPassword: $2a$10$nyG5R781Vbowtj73XohFNOY6RHoMz6fInUMwtHO0lkib.mh0yo4T6
-
+    userPassword: $2a$10$nyG5R781Vbowtj73XohFNOY6RHoMz6fInUMwtHO0lkib.mh0yo4T6    
     dn: uid=secadmin,ou=people,dc=alm,dc=com
     changetype: add
     objectClass: person
@@ -56,8 +52,7 @@ data:
     cn: secadmin
     sn: secadmin
     uid: secadmin
-    userPassword: $2a$10$nyG5R781Vbowtj73XohFNOY6RHoMz6fInUMwtHO0lkib.mh0yo4T6
-
+    userPassword: $2a$10$nyG5R781Vbowtj73XohFNOY6RHoMz6fInUMwtHO0lkib.mh0yo4T6    
     dn: uid=readonly,ou=people,dc=alm,dc=com
     changetype: add
     objectClass: person
@@ -65,25 +60,24 @@ data:
     cn: readonly
     sn: readonly
     uid: readonly
-    userPassword: $2a$10$nyG5R781Vbowtj73XohFNOY6RHoMz6fInUMwtHO0lkib.mh0yo4T6
-
+    userPassword: $2a$10$nyG5R781Vbowtj73XohFNOY6RHoMz6fInUMwtHO0lkib.mh0yo4T6    
     dn: cn=SLMAdmin,ou=groups,dc=alm,dc=com
     objectclass: groupOfNames
     cn: SLMAdmin
-    member: uid=almadmin,ou=people,dc=alm,dc=com
+    member: uid=almadmin,ou=people,dc=alm,dc=com    
 
     dn: cn=Portal,ou=groups,dc=alm,dc=com
     objectclass: groupOfNames
     cn: Portal
     member: uid=almuser,ou=people,dc=alm,dc=com
     member: uid= almoperator,ou=people,dc=alm,dc=com
-    member: uid= almoeditor,ou=people,dc=alm,dc=com
+    member: uid= almoeditor,ou=people,dc=alm,dc=com    
 
     dn: cn=RootSecAdmin,ou=groups,dc=alm,dc=com
     objectclass: groupOfNames
     cn: RootSecAdmin
-    member: uid=secadmin,ou=people,dc=alm,dc=com
-
+    member: uid=secadmin,ou=people,dc=alm,dc=com    
+    
     dn: cn=ReadOnly,ou=groups,dc=alm,dc=com
     objectclass: groupOfNames
     cn: ReadOnly
@@ -122,6 +116,15 @@ metadata:
         containers:
         - image: osixia/openldap:stable
           name: openldap
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/bash
+                  - -c
+                  - |
+                    sleep 60s
+                    ldapadd -x -w $LDAP_ADMIN_PASSWORD -D "cn=admin,dc=alm,dc=com" -f /opt/bootstrap.ldif
           env:
             - name: LDAP_ORGANIZATION
               value: "alm"
