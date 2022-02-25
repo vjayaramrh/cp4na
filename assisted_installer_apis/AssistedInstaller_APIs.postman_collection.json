@@ -1,0 +1,822 @@
+{
+	"info": {
+		"_postman_id": "2c983138-6fc1-46a3-b410-b910f6556eae",
+		"name": "AssistedInstaller_APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ListClusters",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/clusters",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"clusters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetClusterSupportedPlatforms",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/clusters/{{clusterid}}/supported-platforms",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"clusters",
+						"{{clusterid}}",
+						"supported-platforms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateClusterDefinition",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody).id;",
+							"",
+							"pm.environment.set(\"clusterid\", data);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"ocp4ai\", \"openshift_version\":\"{{openshift_version}}\", \"base_dns_domain\":\"oot.lab.eng.bos.redhat.com\",\"ssh_public_key\":\"{{ssh_public_key}}\",\"pull_secret\":\"{{pull_secret}}\",\"machine_networks\":[{\"cidr\":\"192.168.40.0/24\"}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/clusters",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"clusters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteClusterDefinition",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/clusters/{{clusterid}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"clusters",
+						"{{clusterid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateInfraEnv",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody).id;",
+							"",
+							"pm.environment.set(\"infra_env_id\", data);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"{{clustername}}\", \"image_type\":\"minimal-iso\", \"openshift_version\":\"{{openshift_version}}\", \"pull_secret\": \"{{pull_secret}}\",\"ssh_authorized_key\":\"{{ssh_public_key}}\",\"cluster_id\":\"{{clusterid}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/infra-envs",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"infra-envs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteInfraEnv",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/infra-envs/{{infra_env_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"infra-envs",
+						"{{infra_env_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListInfraEnv",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"{{clustername}}\", \"image_type\":\"minimal-iso\", \"openshift_version\":\"{{openshift_version}}\", \"pull_secret\": \"{{pull_secret}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/infra-envs",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"infra-envs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetDiscoveryImageDownloadURL",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"{{clustername}}\", \"image_type\":\"minimal-iso\", \"openshift_version\":\"{{openshift_version}}\", \"pull_secret\": \"{{pull_secret}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/infra-envs/{{infra_env_id}}/downloads/image-url",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"infra-envs",
+						"{{infra_env_id}}",
+						"downloads",
+						"image-url"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetHosts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody)[5];",
+							"",
+							"var inv = data.inventory;",
+							"var hostname = data.requested_hostname;",
+							"",
+							"var data2 = JSON.parse(inv).disks[1].size_bytes;",
+							"",
+							"pm.environment.set(\"disksize\", data2);",
+							"pm.environment.set(\"hostname\", hostname);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"{{clustername}}\", \"image_type\":\"minimal-iso\", \"openshift_version\":\"{{openshift_version}}\", \"pull_secret\": \"{{pull_secret}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/infra-envs/{{infra_env_id}}/hosts",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"infra-envs",
+						"{{infra_env_id}}",
+						"hosts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InstallCluster",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"{{clustername}}\", \"image_type\":\"minimal-iso\", \"openshift_version\":\"{{openshift_version}}\", \"pull_secret\": \"{{pull_secret}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/clusters/{{clusterid}}/actions/install",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"clusters",
+						"{{clusterid}}",
+						"actions",
+						"install"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSupportedOperators",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"{{clustername}}\", \"image_type\":\"minimal-iso\", \"openshift_version\":\"{{openshift_version}}\", \"pull_secret\": \"{{pull_secret}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/supported-operators",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"supported-operators"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetClusterPreflightReqs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/clusters/{{clusterid}}/preflight-requirements",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"clusters",
+						"{{clusterid}}",
+						"preflight-requirements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetEvents",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/events?cluster_id={{clusterid}}&infra_env_id={{infra_env_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"events"
+					],
+					"query": [
+						{
+							"key": "cluster_id",
+							"value": "{{clusterid}}"
+						},
+						{
+							"key": "infra_env_id",
+							"value": "{{infra_env_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CompleteClusterInstall",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/clusters/{{clusterid}}/actions/complete-installation",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"clusters",
+						"{{clusterid}}",
+						"actions",
+						"complete-installation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeRegisterHost",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/infra-envs/{{infra_env_id}}/hosts/{{host_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"infra-envs",
+						"{{infra_env_id}}",
+						"hosts",
+						"{{host_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetClusterCredentials",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/clusters/{{clusterid}}/credentials",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"clusters",
+						"{{clusterid}}",
+						"credentials"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DownloadClusterKubeConfig",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/clusters/{{clusterid}}/downloads/credentials?file_name=kubeconfig",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"clusters",
+						"{{clusterid}}",
+						"downloads",
+						"credentials"
+					],
+					"query": [
+						{
+							"key": "file_name",
+							"value": "kubeconfig"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DownloadClusterKubeadminPassword",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openshift.com/api/assisted-install/v2/clusters/{{clusterid}}/downloads/credentials?file_name=kubeadmin-password",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openshift",
+						"com"
+					],
+					"path": [
+						"api",
+						"assisted-install",
+						"v2",
+						"clusters",
+						"{{clusterid}}",
+						"downloads",
+						"credentials"
+					],
+					"query": [
+						{
+							"key": "file_name",
+							"value": "kubeadmin-password"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "JWT_TOKEN",
+			"value": "custom token here"
+		}
+	]
+}
