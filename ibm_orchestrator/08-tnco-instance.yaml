@@ -1,10 +1,9 @@
-apiVersion: orchestration.tnc.ibm.com/v1beta1
-kind: TNCO
+apiVersion: tnc.ibm.com/v1beta1
+kind: Orchestration
 metadata:
   name: tnco
   namespace: ibmcp4na
 spec:
   license:
     accept: true
-  ldap:
-    ldapSecretName: ldap
+  version: 2.2.2
