@@ -1,3 +1,9 @@
+## General Notes
+These YAML files represent the installation files to setup/install OpenShift Data Foundation 4.9 operator and its storage cluster instance on an existing OCP 4.9 cluster. Certain storage parameters have been fine-tuned to suit the requirements of the IBM CP4NA operator. 
+The YAML files were created by referring the installation guide [here](https://access.redhat.com/articles/5692201).
+
+## Testing and Verification
+
 Use the `cephfs-nginx-svc-test.yaml` , `rbd-nginx-svc-test.yaml` and `cephfs-nginx-svc-test-rwx.yaml` to create cluster IP services that use `ocs-storagecluster-cephfs` and `ocs-storagecluster-ceph-rbd` storage class to create pv and pvc to test out that ODF is working fine on the cluster.
 
 Follow the below steps
