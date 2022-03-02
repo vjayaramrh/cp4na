@@ -32,6 +32,11 @@ Note: The LDAP deployment will have pre-populated users
 
     `ldapsearch -x -b "dc=alm,dc=com" -D "cn=admin,dc=alm,dc=com" -W`
     
+- At the pod shell, execute below command to verify one of the pre-populated users
+  (Note: enter the password for user from https://github.com/redhat-eets/cp4na/blob/main/openldap/ldap-app.yaml when prompted)
+  
+    `ldapwhoami -D 'uid=almuser,ou=people,dc=alm,dc=com' -x -W`
+    
 ## Verifying OpenLDAP users are pre-populated from the PHPLDAPAdmin GUI
 
 Execute `oc get nodes -o wide` to get IP of one of the Bare Metal nodes
