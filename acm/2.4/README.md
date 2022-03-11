@@ -1,12 +1,12 @@
 This directory contains the YAML files that can be used to install Red Hat Advanced Cluster Management for Kubernetes (RHACM) hub cluster and to create the `MultiClusterHub` custom resource.
 
-Pre-Requisites:
+## Pre-Requisites:
 - Red Hat OpenShift Container Platform cluster must be installed.
 - OpenShift Container Platform CLI must be installed.
 - No previous installations of RHACM should be present. 
 
 
-Steps to install RHACM and its custom instance:
+## Steps to install RHACM and its custom instance:
 1. Run the command `oc create -f https://raw.githubusercontent.com/redhat-eets/cp4na/main/acm/2.4/01-namespace-acm.yaml` to create a custom RHACM hub cluster namespace (which is `open-cluster-management` in the case here).
 - The YAMl files that follow have been modified to use the `open-cluster-management` namespace as the namespace to be worked on. 
 
