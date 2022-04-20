@@ -133,7 +133,7 @@ This request lists the OpenShift Discovery ISOs/infra-envs that were created.
 |----------------|-------------------------------|
 |Request Type          |GET|
 |Request URL          |https://api.openshift.com/api/assisted-install/v2/infra-envs|
-|Request Body         |`{"name":"{{clustername}}", "image_type":"minimal-iso", "openshift_version":"{{openshift_version}}", "pull_secret": "{{pull_secret}}"`|
+|Request Body         |`{"name":"{{clustername}}", "image_type":"minimal-iso", "openshift_version":"{{openshift_version}}", "pull_secret": "{{pull_secret}}"}`|
 
 The body variables are as follows:
 
@@ -151,7 +151,7 @@ This request creates and retrieves a new pre-signed image download URL for the i
 |----------------|-------------------------------|
 |Request Type          |GET|
 |Request URL          |[https://api.openshift.com/api/assisted-install/v2/infra-envs/{{infra_env_id}}/downloads/image-url]()|
-|Request Body         |`{"name":"{{clustername}}", "image_type":"minimal-iso", "openshift_version":"{{openshift_version}}", "pull_secret": "{{pull_secret}}"`|
+|Request Body         |`{"name":"{{clustername}}", "image_type":"minimal-iso", "openshift_version":"{{openshift_version}}", "pull_secret": "{{pull_secret}}"}`|
 
 Request URL Path variables:
 
@@ -176,7 +176,7 @@ This request retrieves the list of OpenShift hosts that belong to the infra-env 
 |----------------|-------------------------------|
 |Request Type          |GET|
 |Request URL          |[https://api.openshift.com/api/assisted-install/v2/infra-envs/{{infra_env_id}}/hosts]()|
-|Request Body         |`{"name":"{{clustername}}", "image_type":"minimal-iso", "openshift_version":"{{openshift_version}}", "pull_secret": "{{pull_secret}}"`|
+|Request Body         |`{"name":"{{clustername}}", "image_type":"minimal-iso", "openshift_version":"{{openshift_version}}", "pull_secret": "{{pull_secret}}"}`|
 
 Request URL Path variables:
 
@@ -201,7 +201,7 @@ This request proceeds to initiate the OCP installation over the cluster definiti
 |----------------|-------------------------------|
 |Request Type          |POST|
 |Request URL          |[https://api.openshift.com/api/assisted-install/v2/infra-envs/{{cluster_id}}/actions/install]()|
-|Request Body         |`{"name":"{{clustername}}", "image_type":"minimal-iso", "openshift_version":"{{openshift_version}}", "pull_secret": "{{pull_secret}}"`|
+|Request Body         |`{"name":"{{clustername}}", "image_type":"minimal-iso", "openshift_version":"{{openshift_version}}", "pull_secret": "{{pull_secret}}"}`|
 
 Request URL Path variables:
 
