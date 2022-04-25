@@ -9,21 +9,11 @@
 			"name": "ListClusters",
 			"request": {
 				"auth": {
-					"type": "apikey",
-					"apikey": [
+					"type": "bearer",
+					"bearer": [
 						{
-							"key": "value",
+							"key": "token",
 							"value": "{{JWT_TOKEN}}",
-							"type": "string"
-						},
-						{
-							"key": "in",
-							"value": "header",
-							"type": "string"
-						},
-						{
-							"key": "key",
-							"value": "Authorization",
 							"type": "string"
 						}
 					]
@@ -113,7 +103,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"name\":\"ocp4ai\", \"openshift_version\":\"{{openshift_version}}\", \"base_dns_domain\":\"oot.lab.eng.bos.redhat.com\",\"ssh_public_key\":\"{{ssh_public_key}}\",\"pull_secret\":\"{{pull_secret}}\",\"machine_networks\":[{\"cidr\":\"192.168.40.0/24\"}]}",
+					"raw": "{\"name\":\"{{clustername}}\", \"openshift_version\":\"{{openshift_version}}\", \"base_dns_domain\":\"oot.lab.eng.bos.redhat.com\",\"ssh_public_key\":\"{{ssh_public_key}}\",\"pull_secret\":\"{{pull_secret}}\",\"machine_networks\":[{\"cidr\":\"192.168.40.0/24\"}]}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -290,7 +280,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"name\":\"{{clustername}}\", \"image_type\":\"minimal-iso\", \"openshift_version\":\"{{openshift_version}}\", \"pull_secret\": \"{{pull_secret}}\"}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -335,7 +325,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"name\":\"{{clustername}}\", \"image_type\":\"minimal-iso\", \"openshift_version\":\"{{openshift_version}}\", \"pull_secret\": \"{{pull_secret}}\"}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -389,21 +379,11 @@
 			},
 			"request": {
 				"auth": {
-					"type": "apikey",
-					"apikey": [
+					"type": "bearer",
+					"bearer": [
 						{
-							"key": "value",
+							"key": "token",
 							"value": "{{JWT_TOKEN}}",
-							"type": "string"
-						},
-						{
-							"key": "in",
-							"value": "header",
-							"type": "string"
-						},
-						{
-							"key": "key",
-							"value": "Authorization",
 							"type": "string"
 						}
 					]
@@ -412,7 +392,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"name\":\"{{clustername}}\", \"image_type\":\"minimal-iso\", \"openshift_version\":\"{{openshift_version}}\", \"pull_secret\": \"{{pull_secret}}\"}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -456,7 +436,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"name\":\"{{clustername}}\", \"image_type\":\"minimal-iso\", \"openshift_version\":\"{{openshift_version}}\", \"pull_secret\": \"{{pull_secret}}\"}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -504,7 +484,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"name\":\"{{clustername}}\", \"image_type\":\"minimal-iso\", \"openshift_version\":\"{{openshift_version}}\", \"pull_secret\": \"{{pull_secret}}\"}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
