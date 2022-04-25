@@ -133,16 +133,8 @@ This request lists the OpenShift Discovery ISOs/infra-envs that were created.
 |----------------|-------------------------------|
 |Request Type          |GET|
 |Request URL          |https://api.openshift.com/api/assisted-install/v2/infra-envs|
-|Request Body         |`{"name":"{{clustername}}", "image_type":"minimal-iso", "openshift_version":"{{openshift_version}}", "pull_secret": "{{pull_secret}}"}`|
+|Request Body         |None|
 
-The body variables are as follows:
-
-|    Variable Name            |        Description                |
-|----------------------|-------------------------------|
-|name       |Cluster name to be used.|
-|openshift_version        |Openshift version to be installed on the cluster.|
-|image_type       |Type of image to be used (Minimal or Full)|
-|pull_secret|The pull secret for images that was obtained earlier.|
 
 ### **Get Discovery Image Download URL Request**
 This request creates and retrieves a new pre-signed image download URL for the infra-env/discovery ISO image.
@@ -151,22 +143,13 @@ This request creates and retrieves a new pre-signed image download URL for the i
 |----------------|-------------------------------|
 |Request Type          |GET|
 |Request URL          |[https://api.openshift.com/api/assisted-install/v2/infra-envs/{{infra_env_id}}/downloads/image-url]()|
-|Request Body         |`{"name":"{{clustername}}", "image_type":"minimal-iso", "openshift_version":"{{openshift_version}}", "pull_secret": "{{pull_secret}}"}`|
+|Request Body         |None|
 
 Request URL Path variables:
 
 |    Variable Name            |        Description                |
 |----------------------|-------------------------------|
 |infra_env_id     |The unique value that was generated while creating the discovery ISO image/infra-env|
-
-Request body variables:
-
-|    Variable Name            |        Description                |
-|----------------------|-------------------------------|
-|name       |Cluster name to be used.|
-|openshift_version        |Openshift version to be installed on the cluster.|
-|image_type       |Type of image to be used (Minimal or Full)|
-|pull_secret|The pull secret for images that was obtained earlier.|
 
 
 ### Get Hosts Request
@@ -176,7 +159,7 @@ This request retrieves the list of OpenShift hosts that belong to the infra-env 
 |----------------|-------------------------------|
 |Request Type          |GET|
 |Request URL          |[https://api.openshift.com/api/assisted-install/v2/infra-envs/{{infra_env_id}}/hosts]()|
-|Request Body         |`{"name":"{{clustername}}", "image_type":"minimal-iso", "openshift_version":"{{openshift_version}}", "pull_secret": "{{pull_secret}}"}`|
+|Request Body         |None|
 
 Request URL Path variables:
 
@@ -184,14 +167,6 @@ Request URL Path variables:
 |----------------------|-------------------------------|
 |infra_env_id     |The unique value that was generated while creating the discovery ISO image/infra-env|
 
-Request body variables:
-
-|    Variable Name            |        Description                |
-|----------------------|-------------------------------|
-|name       |Cluster name to be used.|
-|openshift_version        |Openshift version to be installed on the cluster.|
-|image_type       |Type of image to be used (Minimal or Full)|
-|pull_secret|The pull secret for images that was obtained earlier.|
 
 
 ### **Install Cluster Request**
@@ -208,15 +183,6 @@ Request URL Path variables:
 |    Variable Name            |        Description                |
 |----------------------|-------------------------------|
 |cluster_id    |Cluster ID that was generated as part of the create cluster definition request|
-
-Request body variables:
-
-|    Variable Name            |        Description                |
-|----------------------|-------------------------------|
-|name       |Cluster name to be used.|
-|openshift_version        |Openshift version to be installed on the cluster.|
-|image_type       |Type of image to be used (Minimal or Full)|
-|pull_secret|The pull secret for images that was obtained earlier.|
 
 
 ### Get Cluster Events Request
