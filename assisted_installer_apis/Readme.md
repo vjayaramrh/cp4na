@@ -201,7 +201,7 @@ This request proceeds to initiate the OCP installation over the cluster definiti
 |----------------|-------------------------------|
 |Request Type          |POST|
 |Request URL          |[https://api.openshift.com/api/assisted-install/v2/infra-envs/{{cluster_id}}/actions/install]()|
-|Request Body         |`{"name":"{{clustername}}", "image_type":"minimal-iso", "openshift_version":"{{openshift_version}}", "pull_secret": "{{pull_secret}}"}`|
+|Request Body         |None|
 
 Request URL Path variables:
 
