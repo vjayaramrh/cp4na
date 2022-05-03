@@ -1,5 +1,5 @@
 ## General Notes
-These YAML files represent the installation files to setup/install OpenShift Data Foundation 4.9 operator and its storage cluster instance on an existing OCP 4.9 cluster. Certain storage parameters have been fine-tuned to suit the requirements of the IBM CP4NA operator. 
+These YAML files represent the installation files to setup/install OpenShift Data Foundation 4.10 operator and its storage cluster instance on an existing OCP 4.10 cluster. Certain storage parameters have been fine-tuned to suit the requirements of the IBM CP4NA operator. 
 The YAML files were created by referring the installation guide [here](https://access.redhat.com/articles/5692201).
 
 ## Testing and Verification
