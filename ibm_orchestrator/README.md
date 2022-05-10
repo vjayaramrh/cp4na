@@ -5,12 +5,15 @@ This directory contains the yaml files to deploy
 
 Steps to create orchestration instance
 
-1. First edit each of the three yaml files by replacing the pattern {{ some_var_name }} with actual valid values. (e.g; replace instances of {{ cp4na_ns }} occurences with ibmcp4na )
+1. First edit each of the three yaml files by replacing the pattern `{{ some_var_name }}` with actual valid values. (e.g; replace instances of `{{ cp4na_ns }}` occurences with `ibmcp4na` )
 
 2. `oc create -f https://raw.githubusercontent.com/redhat-eets/cp4na/main/ibm_orchestrator/01-cp4na-operator-deploy.yaml`.
 
     The above successfuly installs the CP4NA operator. The above creates a namespace, ldap secret, ibm-entitlment-key secret, service account, catalog sources, operator group and subscription    resource objects. Wait for all resources to be up and running before proceeding to the next step. Below are the variables that you will need to substitute in the yaml file as an example
 
+	
+```
+	
 	{{ channel_version }}: v2.2
 
         {{ cp4na_ns }}: ibmcp4na
@@ -32,20 +35,26 @@ Steps to create orchestration instance
         {{ ldap_user_search_base }}: ou=people
 
         {{ ldap_user_search_filter }}: uid={0}
+	
+```
 
 3. `oc create -f https://raw.githubusercontent.com/redhat-eets/cp4na/main/ibm_orchestrator/02-cp4na-instance.yaml`.
 
    The above creates an instance of the IBM CP4NA operator and takes about 45-75 mins to complete. Below are variables that you will need to substitute in the yaml files as an example
 
+```
   	{{ cp4na_ns }}: ibmcp4na
 
         {{ ver }}: 2.2.2
+```
 
 4. `oc apply -f https://github.com/redhat-eets/cp4na/blob/main/ibm_orchestrator/03-edit-subscription-manual.yaml`.Below are variables that you will need to substitute in the yaml files as an example
 
+```
 	{{ cp4na_ns }}: ibmcp4na
 
 	{{ ip_approval_method }}: Manual
+```
 
 References:
 
