@@ -1,6 +1,9 @@
-This directory contains the yaml files to deploy 
+This directory contains the yaml files to deploy:
+
 	a) the IBM CP4NA operator 
+	
 	b) create an instance of the operator 
+	
 	c) edit the orchestration subscription from Automatic to Manual
 
 Steps to create orchestration instance
