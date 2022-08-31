@@ -1,0 +1,9 @@
+---
+- name: openshift-gitops operator install playbook
+  hosts: localhost
+  roles:
+    - role: openshift_gitops_operator_install
+      vars:
+       ansible_work_dir: /tmp/ansible
+       file_dest_dir: /tmp/openshift_gitops_yaml_files
+       role_name: openshift_gitops_operator_install
