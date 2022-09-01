@@ -4,4 +4,4 @@
   roles:
     - role: openshift_storage_cluster
       vars:
-        file_dest_dir: /home/ODF_yaml_files
+        file_dest_dir: /tmp/ODF_yaml_files

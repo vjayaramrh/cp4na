@@ -23,9 +23,9 @@ These playbooks contain variables which can be tweaked by users to suit their ne
 
 ```
       vars:
-       ansible_work_dir: /ansible         #This variable points to the current ansible directory
+       ansible_work_dir: /tmp/ansible         #This variable points to the current ansible directory
        channel_version : release-2.4      #This variable sets the channel version to be followed while subscribing to the RHACM operator
-       file_dest_dir: /home/acm_yaml_files  #This variable points to the temporary directory that will be created on the user's machine and where yaml manifest files/templates will be downloaded and consumed for use by Ansible
+       file_dest_dir: /tmp/acm_yaml_files  #This variable points to the temporary directory that will be created on the user's machine and where yaml manifest files/templates will be downloaded and consumed for use by Ansible
        role_name: acm_operator_install   #This variable points to the Ansible role to refer to.
 
 ```

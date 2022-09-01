@@ -4,9 +4,9 @@
   roles:
     - role: openshift_lso_install
       vars:
-        ansible_work_dir: /ansible
+        ansible_work_dir: /tmp/ansible
         channel_version: 4.10        
-        file_dest_dir: /home/openshift_LSO_yaml_files  
+        file_dest_dir: /tmp/openshift_LSO_yaml_files  
         role_name: openshift_lso_install
 
 

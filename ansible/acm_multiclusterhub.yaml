@@ -4,4 +4,4 @@
   roles:
     - role: acm_multiclusterhub
       vars:
-       file_dest_dir: /home/acm_yaml_files    
+       file_dest_dir: /tmp/acm_yaml_files    

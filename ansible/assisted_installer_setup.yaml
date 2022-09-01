@@ -15,7 +15,7 @@
     - role: ai_onprem_systemd_svc
       become: yes
       vars:
-        ai_setup_dir: /home/ai_onprem_yaml_files/
+        ai_setup_dir: /tmp/ai_onprem_yaml_files/
         ai_file_tag: v2.5.0
         svc_base_url: 
         svc_name: assisted-installer
