@@ -1,0 +1,11 @@
+---
+- name: ACM post install/deployment playbook
+  hosts: localhost
+  roles:
+    - role: acm_postdeploy
+      vars:
+       ansible_work_dir: /tmp/ansible
+       db_volume_size:       
+       file_dest_dir: /tmp/acm_yaml_files
+       fs_volume_size: 
+       role_name: acm_postdeploy   

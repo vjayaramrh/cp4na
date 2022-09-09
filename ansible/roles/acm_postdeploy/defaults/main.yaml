@@ -1,0 +1,2 @@
+db_volume_size: 10Gi
+fs_volume_size: 20Gi

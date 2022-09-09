@@ -1,0 +1,21 @@
+#YAML Manifest to create the AgentServiceConfig CR for enabling Assisted Service in RHACM
+# NOTE:- For reference on framing this YAML file, https://github.com/openshift/assisted-service/blob/master/config/samples/agent-install.openshift.io_v1beta1_agentserviceconfig.yaml can be reviewed.
+# As a future scope, the file in the above link can be directly implemented here based on the user's use case.
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: AgentServiceConfig
+metadata:
+ name: agent
+spec:
+  databaseStorage:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: {{ db_volume_size }}
+  filesystemStorage:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: {{ fs_volume_size }}
