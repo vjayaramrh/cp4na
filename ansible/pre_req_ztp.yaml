@@ -1,0 +1,5 @@
+---
+- name: ZTP pre-preq patches playbook
+  hosts: localhost
+  roles:
+    - role: ztp_prereq_patches

@@ -1,0 +1,26 @@
+---
+- name: Patch the provisioning object to disable Virtual Media over HTTPS mount in OCP 4.10+ for Bare Metal Object and watch all namespaces
+  kubernetes.core.k8s:
+    state: patched
+    definition:
+      apiVersion: metal3.io/v1alpha1
+      kind: Provisioning
+      metadata:
+        name: provisioning-configuration
+      spec:
+        disableVirtualMediaTLS: true
+        watchAllNamespaces: true
+- name: Patch the ArgoCD object route to use reencrpyt because of a known issue (https://issues.redhat.com/browse/GITOPS-1548)
+  kubernetes.core.k8s:
+    state: patched
+    definition:
+      apiVersion: argoproj.io/v1alpha1
+      kind: ArgoCD
+      metadata:
+        name: openshift-gitops
+        namespace: openshift-gitops
+      spec:
+        server: 
+          route:
+            tls:
+              termination: reencrypt
