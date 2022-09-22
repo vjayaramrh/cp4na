@@ -1,0 +1,40 @@
+listen-address=127.0.0.1,{{ listening_interface_ip_address }}
+interface={{ listening_interface_name }}
+#bind-interfaces
+#except-interface=eno12409
+dhcp-range={{ dhcp_range }}
+dhcp-leasefile=/opt/dnsmasq/dnsmasq.leases
+#dhcp-authoritative
+
+#To disable adding default route to the private network assigned by dnsmasq
+dhcp-option=3,{{ default_gateway }}
+
+
+dhcp-option=6,{{ listening_interface_ip_address }}
+
+
+dhcp-option=1,{{ subnet_mask }}
+
+
+domain={{ fqdn_name }}
+expand-hosts
+
+
+#Google's nameservers
+server=8.8.8.8
+server=8.8.4.4
+server={{ listening_interface_ip_address }}
+
+
+{% for ipaddr_host in ipaddr_hosts %}
+# {{ custom_dns_hostnames[loop.index - 1] }} 
+dhcp-host={{ macaddr_hosts[loop.index - 1] }},{{ ipaddr_host }},{{ custom_dns_hostnames[loop.index - 1] }}.{{ fqdn_name }}
+address=/{{ custom_dns_hostnames[loop.index - 1] }}.{{ fqdn_name }}/{{ ipaddr_host }}
+ptr-record={{ ipaddr_host | split('.')| reverse | join('.') }}.in-addr.arpa,{{ custom_dns_hostnames[loop.index - 1] }}.{{ fqdn_name }}
+
+{% endfor %}
+
+
+# Sample wildcard addresses for cluster API and apps as a reference
+#address=/api.ocphub4ztp.cp4na.bos2.lab/192.168.19.21
+#address=/*.apps.ocphub4ztp.cp4na.bos2.lab/192.168.19.86

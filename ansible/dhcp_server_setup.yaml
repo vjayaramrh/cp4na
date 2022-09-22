@@ -29,11 +29,18 @@
     - role: dhcp_config_file
       become: yes
       vars:
+        custom_dns_hostnames: [master-node-1,master-node-2,master-node-3,worker-node-1,worker-node-2,worker-node-3]
+        default_gateway: 192.168.19.1
         dhcp_conf_dir: /etc/dnsmasq/
         dhcp_conf_file: dnsmasq.conf
-        dhcp_range: 172.168.40.50,172.168.40.150,12h
-        listening_interface_ip_address: 172.168.40.6
-        listening_interface_name: eno12409
+        dhcp_range: 192.168.19.20,192.168.19.125,12h
+        fqdn_name: cp4na.bos2.lab
+        include_custom_fqdn: yes
+        ipaddr_hosts: [192.168.19.74,192.168.19.73,192.168.19.57,192.168.19.101,192.168.19.43,192.168.19.71]
+        listening_interface_ip_address: 192.168.19.11
+        listening_interface_name: eno12399
+        macaddr_hosts: ["b4:96:91:d6:7a:a4","b4:96:91:d6:7b:48","b4:96:91:d6:7a:94","b4:96:91:d6:7a:c0","b4:96:91:d6:7f:88","b4:96:91:d6:7f:ec"]
+        subnet_mask: 255.255.255.128
     - role: container_systemd_service
       become: yes
       vars:

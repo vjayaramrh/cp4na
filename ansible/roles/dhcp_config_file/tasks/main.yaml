@@ -5,7 +5,18 @@
     state: directory
     mode: '0755'
 
-- name: create the '{{ dhcp_conf_file }}'
+- name: set fact for the "include_custom_fqdn variable"
+  set_fact:
+    include_custom_fqdn: "{{ include_custom_fqdn }}"
+
+- name: create the '{{ dhcp_conf_file }}' for custom fqdn environment
   template:
-    src: dnsmasq.conf.j2
-    dest: "{{ dhcp_conf_dir}}/{{ dhcp_conf_file }}"
+    src: "dnsmasq.conf.custom_fqdn.j2"
+    dest: "{{ dhcp_conf_dir }}/{{ dhcp_conf_file }}"
+  when: include_custom_fqdn
+
+- name: create the '{{ dhcp_conf_file }}' for existing fqdn environment
+  template:
+    src: "dnsmasq.conf.existing_fqdn.j2"
+    dest: "{{ dhcp_conf_dir }}/{{ dhcp_conf_file }}"
+  when: not include_custom_fqdn
