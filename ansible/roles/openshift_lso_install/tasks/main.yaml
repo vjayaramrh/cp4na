@@ -67,15 +67,16 @@
     src: "{{ file_dest_dir }}/{{ item }}.yaml"
   with_items: "{{ worker_names }}"
 
-- name: check subscription status of the local storage operator
+- name: check csv status of the local storage operator
   kubernetes.core.k8s_info:
-    kind: Subscription
+    kind: ClusterServiceVersion
     api_version: operators.coreos.com/v1alpha1
     name: local-storage-operator
-    namespace: openshift-local-storage
-  register: suboutput
-  until: suboutput.resources[0].status.conditions[0].type == "CatalogSourcesUnhealthy" and suboutput.resources[0].status.conditions[0].status == "False"
-  retries: 20
+    label_selectors:
+      - "operators.coreos.com/local-storage-operator.openshift-local-storage"
+  register: csvoutput
+  until: csvoutput.resources[0].status.phase == "Succeeded" 
+  retries: 40
   delay: 15
 
 - name: Download creation of auto-discover-devices LocalVolumeDiscovery resource yaml manifest file from github repo
