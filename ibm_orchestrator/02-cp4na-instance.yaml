@@ -7,4 +7,6 @@ metadata:
 spec:
   license:
     accept: true
+  featureconfig:
+    siteplanner: true
   version: {{ ver }}
