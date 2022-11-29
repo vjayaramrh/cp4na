@@ -1,0 +1,27 @@
+---
+- name: Install LMCTL Python module for IBM CP4NA
+  ansible.builtin.pip:
+    name: lmctl
+    state: present
+
+- name: Extract the default IBM CP4NA GUI "admin" user's password, CP4NA orchestration GUI link and Ishtar link
+  ansible.builtin.shell: "{{ item }}"
+  register: cmd_outputs
+  with_items:
+    - oc get secret platform-auth-idp-credentials -n ibm-common-services -o='jsonpath={.data.admin_password}' | base64 -d
+    - oc get route cp4na-o-ishtar -n '{{ cp4na_ns }}' -o jsonpath='{.spec.host}'
+    - oc get orchestration tnco -o 'jsonpath={..status.uiendpoints.orchestration}' -n '{{ cp4na_ns }}'
+
+- name: Create LMCTL config file from template
+  template:
+    src: lmctl.yaml.j2
+    dest: "{{ file_dest_dir }}/lmctl.yaml"
+
+
+- name: Set the default namespace as the IBM CP4NA namespace and onboard the ansible lifecycle driver into CP4NA
+  ansible.builtin.shell: "{{ item }}"
+  with_items:
+    - oc project '{{ cp4na_ns }}'
+    - lmctl resourcedriver add --type ansible --url https://ansible-lifecycle-driver:'{{ cp4na_ansible_driver_port }}' dev --certificate '{{ file_dest_dir }}'/ald-tls.pem
+  environment:
+    LMCONFIG: "{{ file_dest_dir }}/lmctl.yaml"  

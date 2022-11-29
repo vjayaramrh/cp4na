@@ -1,0 +1,10 @@
+active_environment: dev
+environments:
+  dev:
+    tnco:
+      address: https://{{ cmd_outputs.results[1].stdout }}
+      api_key: {{ cp4na_admin_api_key }}
+      auth_address: {{ cmd_outputs.results[2].stdout }}/icp4d-api/v1/authorize
+      auth_mode: zen
+      secure: true
+      username: admin
