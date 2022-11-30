@@ -10,7 +10,7 @@ Current capabilities that can be run using Ansible playbooks include:
 
 ## Pre-Requisites
 - This exercise can be done by running Ansible within a container (in the case here, Podman was used) and making sure that Ansible's working directory is pointing towards the user's directory containing this folder (Ansible directory) acquired from the repo. For example, in the case here, the following command was used to run/start the ansible container:
-`sudo podman run --name ansible --net=host --cap-add=NET_ADMIN -it -v $(pwd):/ansible/ -v ~/.kube:/root/.kube -v ~/.ssh/id_rsa:/root/id_rsa willhallonline/ansible:latest /bin/sh`
+`sudo podman run --name ansible --net=host --cap-add=NET_ADMIN -it -v $(pwd):/ansible/ -v ~/.kube:/root/.kube -v ~/.ssh:/root/.ssh willhallonline/ansible:latest /bin/sh`
 - A key note here is that the `.kube` folder or any other folder containing the OCP cluster (operators to be installed on this cluster) kubeconfig has to be mounted to the ansible container as well to be able to gain access to the OCP cluster intended to be used.
 - Execute the `pre-req.yaml` playbook to install required ansible/python modules within the Ansible container by running the command `sudo podman exec <container-name> ansible-playbook pre-req.yaml` in the machine hosting the container. 
 
