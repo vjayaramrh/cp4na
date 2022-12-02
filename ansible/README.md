@@ -36,7 +36,6 @@ These playbooks contain variables which can be tweaked by users to suit their ne
 - The `openshift_lso_install.yaml` playbook installs and deploys the local storage operator to meet a pre-requisite before installing the ODF operator.
 - The `openshift_lso_volume_set.yaml` playbook creates a local volume set resource for the local storage operator.
 - The `openshift_so_install.yaml` playbook installs and deploys the ODF operator.
-- The `openshift_storage_system.yaml` playbook creates a storage system resource (needed before creating a storage cluster).
 - The `openshift_storage_cluster.yaml` playbook creates a storage cluster.
 - The `openshift_default_storage_class.yaml` playbook sets the default openshift storage class.
 - The `openldap_playbook.yaml` playbook installs and deploys the OpenLDAP application needed for the IBM CP4NA operator instance.

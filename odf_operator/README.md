@@ -7,7 +7,6 @@ These files include the following:
 - Local volume discovery creation.
 - Creation of local volume set.
 - Namespace, operator group and subscription creation for the ODF operator.
-- Creation of the storage system resource.
 - Creation of the storage cluster resource.
 - Default storage class setting.
 

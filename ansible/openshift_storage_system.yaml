@@ -1,9 +1,0 @@
----
-- name: OpenShift ODF storage system creation playbook
-  hosts: localhost
-  roles:
-    - role: openshift_storage_system
-      vars:
-        file_dest_dir: /tmp/ODF_yaml_files
-
-
