@@ -1,0 +1,5 @@
+---
+- name: helm install playbook
+  hosts: localhost
+  roles:
+    - role: helm_install
