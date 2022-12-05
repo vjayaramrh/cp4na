@@ -6,6 +6,7 @@
     # value of 'stable' can be provided as well
     oc_ver: 4.10.0-rc.8
     argocdcli_ver_tag: v2.5.0
+    cp4na_repo_dest: /tmp/siteplanner_yaml_files
 
   roles:
     - role: helm_install
@@ -29,3 +30,17 @@
       url: "https://github.com/argoproj/argo-cd/releases/download/{{ argocdcli_ver_tag }}/argocd-linux-amd64"
       dest: /usr/local/bin/argocd
       mode: 0555
+
+  - name: Check if the "{{ cp4na_repo_dest }}" directory exists and create it if it doesn't exist
+    ansible.builtin.file:
+      path: "{{ file_dest_dir }}"
+      state: directory
+      mode: '0755'
+
+  - name: Git clone
+    ansible.builtin.git:
+      accept_hostkey: yes    
+      repo: git@github.com:redhat-eets/cp4na_assembly_scripts.git
+      dest: "{{ cp4na_repo_dest }}"
+      key_file: ~/.ssh/id_rsa
+      force: yes
