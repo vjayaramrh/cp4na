@@ -23,6 +23,16 @@
     src: lmctl.yaml.j2
     dest: "{{ file_dest_dir }}/lmctl.yaml"
 
+- name: check for a previous deployment of ansible driver
+  kubernetes.core.k8s_info:
+    kind: Deployment
+    name: "ansible-lifecycle-driver"
+    namespace: "{{ cp4na_ns }}"
+  register: deployment_status
+
+- name: output register
+  ansible.builtin.debug:
+    var: deployment_status
 
 - name: Set the default namespace as the IBM CP4NA namespace and onboard the ansible lifecycle driver into CP4NA
   ansible.builtin.shell: "{{ item }}"
@@ -30,7 +40,9 @@
     - oc project '{{ cp4na_ns }}'
     - lmctl resourcedriver add --type ansible --url https://ansible-lifecycle-driver:'{{ cp4na_ansible_driver_port }}' dev --certificate '{{ file_dest_dir }}'/ald-tls.pem
   environment:
-    LMCONFIG: "{{ file_dest_dir }}/lmctl.yaml"  
+    LMCONFIG: "{{ file_dest_dir }}/lmctl.yaml"
+  when: deployment_status.resources == []
+
 
 - name: Check if the "{{ cp4na_repo_dest }}" directory exists and create it if it doesn't exist
   ansible.builtin.file:
