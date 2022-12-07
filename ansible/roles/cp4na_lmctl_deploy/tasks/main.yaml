@@ -59,3 +59,6 @@
     - "{{ cp4na_repo_dest }}/ocp-cluster-automation-develop"
     - "{{ cp4na_repo_dest }}/prereqs-datamodel-master"
     - "{{ cp4na_repo_dest }}/server-automation-master"
+  environment:
+    LMCONFIG: "{{ file_dest_dir }}/lmctl.yaml"
+  when: deployment_status.resources == []
